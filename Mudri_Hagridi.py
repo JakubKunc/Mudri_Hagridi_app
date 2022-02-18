@@ -46,7 +46,7 @@ def uwod():
     uvod.resizable(False, False)
 
     spustit = Button(uvod, text="Spustit", command=start, height=5, width=100)
-    spustit.pack()
+    spustit.place(x=uvod.winfo_screenwidth()/2, y=uvod.winfo_screenheight()/2, anchor=CENTER)
 
     uvod.mainloop()
 
