@@ -1,6 +1,6 @@
 otazky = [
-        "Kde vznikli Múdří Hagridi?:",
-        "Kdy vznikli Múdří Hagridi?:",
+        "Kde vznikli (oficiálně) Múdří Hagridi?:",
+        "Kdy vznikli (oficiálně) Múdří Hagridi?:",
         "Kdo má u Múdrých Hagridů zapsáno nejvíce múdrostí?:",
         "Jak se jmenuje první pořad Múdrých Hagridů?:"
         ]
