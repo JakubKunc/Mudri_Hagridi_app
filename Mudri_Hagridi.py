@@ -11,11 +11,12 @@ spatne_odpovedi_pocet = 0
 barvy_okna = ["#00BFFF","#442E1D"]
 
 def start(*args):
-    uvod.destroy()
+    spustit.destroy()
     okno()
 
 def nahru(*args):
-    wokno.destroy()
+    platno.destroy()
+    na_hru.destroy()
     hra()
 
 def kontrola(*args):
@@ -51,7 +52,8 @@ def kontrola(*args):
         otazka_4()
 
     elif aktualni_otazka == 4:
-        herni_okno.destroy()
+        frame4.destroy()
+        otazky_prostor.destroy()
         okno()
 
 def otazka_1():
@@ -62,13 +64,13 @@ def otazka_1():
     otazky_prostor.config(text=otazky[aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
-    frame1 = Frame(herni_okno)
+    frame1 = Frame(window)
     frame1.pack()
     for i in range(len(moznosti[aktualni_otazka])):
             moznostni_prostor = Radiobutton(frame1, text=moznosti[aktualni_otazka][aktualni_moznost], variable=x, value=i)
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi1 = Button(herni_okno, text="Zkontrolovat otázku", command=kontrola)
+    odeslani_odpovedi1 = Button(frame1, text="Zkontrolovat otázku", command=kontrola)
     odeslani_odpovedi1.pack()
 
 def otazka_2():
@@ -79,13 +81,13 @@ def otazka_2():
     otazky_prostor.config(text=otazky[aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
-    frame2 = Frame(herni_okno)
+    frame2 = Frame(window)
     frame2.pack()
     for i in range(len(moznosti[aktualni_otazka])):
             moznostni_prostor = Radiobutton(frame2, text=moznosti[aktualni_otazka][aktualni_moznost], variable=x, value=i)
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi2 = Button(herni_okno, text="Zkontrolovat otázku", command=kontrola)
+    odeslani_odpovedi2 = Button(frame2, text="Zkontrolovat otázku", command=kontrola)
     odeslani_odpovedi2.pack()
 
 def otazka_3():
@@ -96,13 +98,13 @@ def otazka_3():
     otazky_prostor.config(text=otazky[aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
-    frame3 = Frame(herni_okno)
+    frame3 = Frame(window)
     frame3.pack()
     for i in range(len(moznosti[aktualni_otazka])):
             moznostni_prostor = Radiobutton(frame3, text=moznosti[aktualni_otazka][aktualni_moznost], variable=x, value=i)
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi3 = Button(herni_okno, text="Zkontrolovat otázku", command=kontrola)
+    odeslani_odpovedi3 = Button(frame3, text="Zkontrolovat otázku", command=kontrola)
     odeslani_odpovedi3.pack()
 
 def otazka_4():
@@ -113,33 +115,34 @@ def otazka_4():
     otazky_prostor.config(text=otazky[aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
-    frame4 = Frame(herni_okno)
+    frame4 = Frame(window)
     frame4.pack()
     for i in range(len(moznosti[aktualni_otazka])):
             moznostni_prostor = Radiobutton(frame4, text=moznosti[aktualni_otazka][aktualni_moznost], variable=x, value=i)
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi4 = Button(herni_okno, text="Zkontrolovat otázku", command=kontrola)
+    odeslani_odpovedi4 = Button(frame4, text="Zkontrolovat otázku", command=kontrola)
     odeslani_odpovedi4.pack()
 
+def oknow():
+    global window
+    window = Tk()
+    window.title("Múdří Hagridi")
+    window.state("zoomed")
+    window.resizable(False, False)
+    window.config(background=barvy_okna[1])
+    uwod()
+    window.mainloop()
+
 def uwod():
-    global uvod
+    global spustit
 
-    uvod = Tk()
-    uvod.title("Múdří Hagridi")
-    uvod.state("zoomed")
-    uvod.resizable(False, False)
-    uvod.config(background=barvy_okna[1])
-
-    spustit = Button(uvod, text="Spustit", command=start, height=5, width=100, bg=barvy_okna[0], activebackground=barvy_okna[0])
-    spustit.place(x=uvod.winfo_screenwidth()/2, y=uvod.winfo_screenheight()/2, anchor=CENTER)
-    uvod.bind("<Return>", start)
-
-
-    uvod.mainloop()
+    spustit = Button(window, text="Spustit", command=start, height=5, width=100, bg=barvy_okna[0], activebackground=barvy_okna[0])
+    spustit.place(x=window.winfo_screenwidth()/2, y=window.winfo_screenheight()/2, anchor=CENTER)
+    window.bind("<Return>", start)
 
 def hra():
-    global herni_okno
+    global window
     global otazky_prostor
     global aktualni_otazka
     global posledni_otazka
@@ -150,34 +153,24 @@ def hra():
     zobrazena_otazka = 0
     posledni_otazka = 0
 
-    herni_okno = Tk()
-    herni_okno.title("Múdří Hagridi")
-    herni_okno.state("zoomed")
-    herni_okno.resizable(False, False)
-
-    otazky_prostor = Label(herni_okno,)
+    otazky_prostor = Label(window)
     otazky_prostor.pack()
-    herni_okno.bind("<Return>", kontrola)
+    window.bind("<Return>", kontrola)
 
     otazka_1()
-    herni_okno.mainloop()
 
 def okno():
-    global wokno
+    global window
     global zadane_odpovedi
     global aktualni_otazka
     global spravne_odpovedi_pocet
+    global platno
+    global na_hru
 
-    wokno = Tk()
-    wokno.title("Múdří Hagridi")
-    wokno.state("zoomed")
-    wokno.resizable(False, False)
-    wokno.config(background="#239B11")
-
-    width = wokno.winfo_screenwidth()
-    height = wokno.winfo_screenheight()
+    width = window.winfo_screenwidth()
+    height = window.winfo_screenheight()
     sirka_ramu = round(width/50)
-    platno = Canvas(wokno, width=width, height=height, background="#239B11")
+    platno = Canvas(window, width=width, height=height, background="#239B11")
 
     if zadane_odpovedi == []:
         for i in range(0,4):
@@ -196,21 +189,19 @@ def okno():
 
     platno.pack()
     if aktualni_otazka == 0:    
-        na_hru = Button(wokno, text="vyčistit okno", command=nahru, bg="#DC143C", activebackground="#DC143C")
+        na_hru = Button(window, text="vyčistit okno", command=nahru, bg="#DC143C", activebackground="#DC143C")
         na_hru.place(x=width/2, y=height/2, anchor=CENTER)
-        wokno.bind("<Return>", nahru)
+        window.bind("<Return>", nahru)
 
     else:
         if spravne_odpovedi_pocet == 0:
-            cteni_vysledku = Label(wokno, text=("Nepovedlo se vám vyčistit okno"), background="#DC143C")
+            cteni_vysledku = Label(window, text=("Nepovedlo se vám vyčistit okno"), background="#DC143C")
             cteni_vysledku.place(x=width/2, y=height/2, anchor=CENTER)
         elif spravne_odpovedi_pocet < len(otazky):
-            cteni_vysledku = Label(wokno, text=("Vyčistili jste {}/{} okna").format(spravne_odpovedi_pocet, len(otazky)), background="#DC143C")
+            cteni_vysledku = Label(window, text=("Vyčistili jste {}/{} okna").format(spravne_odpovedi_pocet, len(otazky)), background="#DC143C")
             cteni_vysledku.place(x=width/2, y=height/2, anchor=CENTER)
         elif spravne_odpovedi_pocet == len(otazky):
-            cteni_vysledku = Label(wokno, text=("Vyčistili jste celé okno"), background="#DC143C")
+            cteni_vysledku = Label(window, text=("Vyčistili jste celé okno"), background="#DC143C")
             cteni_vysledku.place(x=width/2, y=height/2, anchor=CENTER)
 
-    wokno.mainloop()
-
-uwod()
+oknow()
