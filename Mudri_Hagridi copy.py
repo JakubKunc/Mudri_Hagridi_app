@@ -10,15 +10,15 @@ spatne_odpovedi_pocet = 0
 
 barvy_okna = ["#00BFFF","#442E1D"]
 
-def start():
+def start(*args):
     uvod.destroy()
     okno()
 
-def nahru():
+def nahru(*args):
     wokno.destroy()
     hra()
 
-def kontrola():
+def kontrola(*args):
     global x
     global spravne_odpovedi_pocet
     global spatne_odpovedi_pocet
@@ -50,7 +50,7 @@ def kontrola():
         odeslani_odpovedi3.destroy()
         otazka_4()
 
-    elif aktualni_otazka == len(otazky):
+    elif aktualni_otazka == 4:
         herni_okno.destroy()
         okno()
 
@@ -133,6 +133,8 @@ def uwod():
 
     spustit = Button(uvod, text="Spustit", command=start, height=5, width=100, bg=barvy_okna[0], activebackground=barvy_okna[0])
     spustit.place(x=uvod.winfo_screenwidth()/2, y=uvod.winfo_screenheight()/2, anchor=CENTER)
+    uvod.bind("<Return>", start)
+
 
     uvod.mainloop()
 
@@ -155,6 +157,7 @@ def hra():
 
     otazky_prostor = Label(herni_okno,)
     otazky_prostor.pack()
+    herni_okno.bind("<Return>", kontrola)
 
     otazka_1()
     herni_okno.mainloop()
@@ -195,6 +198,7 @@ def okno():
     if aktualni_otazka == 0:    
         na_hru = Button(wokno, text="vyčistit okno", command=nahru, bg="#DC143C", activebackground="#DC143C")
         na_hru.place(x=width/2, y=height/2, anchor=CENTER)
+        wokno.bind("<Return>", nahru)
 
     else:
         if spravne_odpovedi_pocet == 0:
