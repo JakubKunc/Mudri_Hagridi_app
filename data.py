@@ -11,3 +11,7 @@ moznosti = [["A. na Novém Hrozenkově", "B. v Uherském Hradišti", "C. ve Zlí
            ["A. TalkShow Toma Vajčnera", "B. Tonyho postřehy", "C. Dechparáda", "D. Hagridova podkolenka", "E. Múdropárty"]]
 
 spravne_odpovedi = [0,3,2,4]
+
+zadane_odpovedi = []
+
+barvy = ["#00BFFF","#442E1D","#DC143C","#239B11"]
