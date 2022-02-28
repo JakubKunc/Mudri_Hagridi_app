@@ -2,7 +2,7 @@ otazky = [
         "Kde vznikli (oficiálně) Múdří Hagridi?:",
         "Kdy vznikli (oficiálně) Múdří Hagridi?:",
         "Kdo má u Múdrých Hagridů zapsáno nejvíce múdrostí?:",
-        "Jak se jmenuje první pořad Múdrých Hagridů?:"
+        "Jak se jmenuje první pořad Múdrých Hagridů?:",
         ]
 
 moznosti = [["A. na Novém Hrozenkově", "B. v Uherském Hradišti", "C. ve Zlíně", "D. ve Štěpnicích","E. na Rudné pod Pradědem"],
@@ -14,4 +14,5 @@ spravne_odpovedi = [0,3,2,4]
 
 zadane_odpovedi = []
 
-barvy = ["#00BFFF","#442E1D","#DC143C","#239B11"]
+barvy = ["#00BFFF","#442E1D","#DC143C"]
+barvy_okna = ["#00BFFF","#442E1D","#DC143C","#239B11"] #blankytně modrá, bahnitě hnědá, karmínově červená, nwmjaká zelená
