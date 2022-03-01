@@ -14,5 +14,5 @@ spravne_odpovedi = [0,3,2,4]
 
 zadane_odpovedi = []
 
-barvy = ["#00BFFF","#442E1D","#DC143C"]
+barvy = ["#00BFFF","#442E1D"]
 barvy_okna = ["#00BFFF","#442E1D","#DC143C","#239B11"] #blankytně modrá, bahnitě hnědá, karmínově červená, nwmjaká zelená
