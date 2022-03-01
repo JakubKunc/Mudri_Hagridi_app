@@ -1,7 +1,9 @@
+from pdb import Restart
 from tkinter import *
 from data import *
 from preklady import *
 from tkinter import colorchooser
+from tkinter import messagebox
 
 aktualni_otazka = 0
 odpoved = 0
@@ -167,6 +169,22 @@ def Kontrola(*args):
         otazky_prostor.destroy()
         Okno()
 
+def Pryc():
+    window.destroy()
+
+def Cestina():
+    global a
+    a = 0
+    if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+        window.destroy()
+        if len(otazky[a]) == 4:
+            Oknow()
+        else:
+            win = Tk()
+            Label(win, text="1/0").pack()
+            win.mainloop()
+
+
 def Otazka_1():
     global frame1
     global odeslani_odpovedi1
@@ -242,13 +260,21 @@ def Oknow():
     window.state("zoomed")
     window.resizable(False, False)
     window.config(background=barvy[1])
+    menu = Menu(window)
+    window.config(menu=menu)
+    zavrit = Menu(menu, tearoff=False)
+    menu.add_cascade(label=exit[a], menu=zavrit)
+    zavrit.add_command(label=zavritw[a], command=Pryc)
+    jazyk = Menu(menu, tearoff=False)
+    menu.add_cascade(label=jaz[a], menu=jazyk)
+    jazyk.add_command(label=cestina[a], command=Cestina)
     Uwod()
     window.mainloop()
+
 
 def Uwod():
     global spustit
     global nastaveni
-
     spustit = Button(window, text=spust[a], command=Start, height=5, width=100, bg=barvy[0], activebackground=barvy[0])
     spustit.place(x=window.winfo_screenwidth()/2, y=window.winfo_screenheight()/2-50, anchor=CENTER)
     window.bind("<S>", Start)
@@ -294,6 +320,7 @@ def Okno():
     height = window.winfo_screenheight()
     sirka_ramu = round(width/50)
     platno = Canvas(window, width=width, height=height, background=barvy_okna[3])
+    height = window.winfo_screenheight()-round(window.winfo_screenheight()/20)
 
     if zadane_odpovedi == []:
         for i in range(0,4):
