@@ -1,4 +1,3 @@
-from pdb import Restart
 from tkinter import *
 from data import *
 from preklady import *
@@ -191,7 +190,17 @@ def Pryc():
 
 def Cestina():
     global a
+    global spravne_odpovedi_pocet
+    global spatne_odpovedi_pocet
+    global aktualni_otazka
+    global zadane_odpovedi
+
     a = 0
+    spravne_odpovedi_pocet = 0
+    spatne_odpovedi_pocet = 0
+    aktualni_otazka = 0
+    zadane_odpovedi.clear()
+    
     if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
         window.destroy()
         if len(otazky[a]) == 4:
@@ -203,7 +212,39 @@ def Cestina():
 
 def Anglictina():
     global a
+    global spravne_odpovedi_pocet
+    global spatne_odpovedi_pocet
+    global aktualni_otazka
+    global zadane_odpovedi
+
     a = 1
+    spravne_odpovedi_pocet = 0
+    spatne_odpovedi_pocet = 0
+    aktualni_otazka = 0
+    zadane_odpovedi.clear()
+
+    if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+        window.destroy()
+        if len(otazky[a]) == 4:
+            Oknow()
+        else:
+            win = Tk()
+            Label(win, text="1/0").pack()
+            win.mainloop()
+
+def Nemcina():
+    global a
+    global spravne_odpovedi_pocet
+    global spatne_odpovedi_pocet
+    global aktualni_otazka
+    global zadane_odpovedi
+
+    a = 2
+    spravne_odpovedi_pocet = 0
+    spatne_odpovedi_pocet = 0
+    aktualni_otazka = 0
+    zadane_odpovedi.clear()
+
     if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
         window.destroy()
         if len(otazky[a]) == 4:
@@ -297,6 +338,7 @@ def Oknow():
     menu.add_cascade(label=jaz[a], menu=jazyk)
     jazyk.add_command(label=cestina[a], command=Cestina)
     jazyk.add_command(label=anglictina[a], command=Anglictina)
+    jazyk.add_command(label=nemcina[a], command=Nemcina)
     Uwod()
     window.mainloop()
 
