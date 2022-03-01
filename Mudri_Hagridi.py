@@ -60,12 +60,15 @@ def Nastaveni(*args):
     ramovabarva.pack()
     zednibarva = Button(nastavenia, text=zdiba[a], command=ZedniBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     zednibarva.pack()
+    barva1 = Button(nastavenia, text=bar1[a], command=Barva1, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    barva1.pack()
+    barva2 = Button(nastavenia, text=bar2[a], command=Barva2, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    barva2.pack()
     nastavenib = Frame(window, bg=barvy[1])
     nastavenib.pack()
-    barva1 = Button(nastavenib, text=bar1[a], command=Barva1, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
-    barva1.pack()
-    barva2 = Button(nastavenib, text=bar2[a], command=Barva2, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
-    barva2.pack()
+    for i in range(len(jazyky[a])):
+        jzyk = Button(nastavenib, text=jazyky[a][i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+        jzyk.pack()
     window.bind("<b>", NaUwod)
     window.bind("<B>", NaUwod)
     znastaveni = Button(window, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], text=znas[a], command=NaUwod)
@@ -88,6 +91,7 @@ def ZedniBarva():
     barvy_okna.insert(3,colorchooser.askcolor()[1])
 
 def Barva1():
+    global nastavenib
     barvy.pop(0)
     barvy.insert(0,colorchooser.askcolor()[1])
     cistabarva.config(fg=barvy[0], activeforeground=barvy[0])
@@ -96,8 +100,16 @@ def Barva1():
     zednibarva.config(fg=barvy[0], activeforeground=barvy[0])
     barva1.config(fg=barvy[0], activeforeground=barvy[0])
     barva2.config(fg=barvy[0], activeforeground=barvy[0])
+    nastavenib.destroy()
+    nastavenib = Frame(window, bg=barvy[1])
+    nastavenib.pack()
+    for i in range(len(jazyky[a])):
+        jzyk = Button(nastavenib, text=jazyky[a][i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+        jzyk.pack()
+    znastaveni.config(fg=barvy[0], activeforeground=barvy[0])
 
 def Barva2():
+    global nastavenib
     barvy.pop()
     barvy.insert(1,colorchooser.askcolor()[1])
     cistabarva.config(bg=barvy[1], activebackground=barvy[1])
@@ -107,8 +119,13 @@ def Barva2():
     barva1.config(bg=barvy[1], activebackground=barvy[1])
     barva2.config(bg=barvy[1], activebackground=barvy[1])
     nastavenia.config(bg=barvy[1])
-    nastavenib.config(bg=barvy[1])
-    znastaveni.config(bg=barvy[1])
+    nastavenib.destroy()
+    nastavenib = Frame(window, bg=barvy[1])
+    nastavenib.pack()
+    for i in range(len(jazyky[a])):
+        jzyk = Button(nastavenib, text=jazyky[a][i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+        jzyk.pack()
+    znastaveni.config(bg=barvy[1], activebackground=barvy[1])
     window.config(bg=barvy[1])
 
 def NaUwod(*args):
@@ -184,6 +201,17 @@ def Cestina():
             Label(win, text="1/0").pack()
             win.mainloop()
 
+def Anglictina():
+    global a
+    a = 1
+    if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+        window.destroy()
+        if len(otazky[a]) == 4:
+            Oknow()
+        else:
+            win = Tk()
+            Label(win, text="1/0").pack()
+            win.mainloop()
 
 def Otazka_1():
     global frame1
@@ -268,6 +296,7 @@ def Oknow():
     jazyk = Menu(menu, tearoff=False)
     menu.add_cascade(label=jaz[a], menu=jazyk)
     jazyk.add_command(label=cestina[a], command=Cestina)
+    jazyk.add_command(label=anglictina[a], command=Anglictina)
     Uwod()
     window.mainloop()
 
