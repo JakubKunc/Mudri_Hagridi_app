@@ -7,6 +7,8 @@ odpoved = 0
 spravne_odpovedi_pocet = 0
 spatne_odpovedi_pocet = 0
 
+a = 0
+
 def Past(nt):
     pass
 
@@ -23,6 +25,13 @@ def NaHru(*args):
 def Nastaveni(*args):
     global nastavenia
     global nastavenib
+    global cistabarva
+    global spinavabarva
+    global ramovabarva
+    global zednibarva
+    global barva1
+    global barva2
+
     spustit.destroy()
     nastaveni.destroy()
     window.bind("<s>", Past)
@@ -33,19 +42,19 @@ def Nastaveni(*args):
     window.bind(2, Past)
     nastavenia = Frame(window, bg=barvy[1])
     nastavenia.pack()
-    cistabarva = Button(nastavenia, text="Nastavte barvu pro vyčestěné části okna", command=CistaBarva)
+    cistabarva = Button(nastavenia, text="Nastavte barvu pro vyčestěné části okna", command=CistaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     cistabarva.pack()
-    spinavabarva = Button(nastavenia, text="Nastavte barvu pro špinavé části okna", command=SpinavaBarva)
+    spinavabarva = Button(nastavenia, text="Nastavte barvu pro špinavé části okna", command=SpinavaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     spinavabarva.pack()
-    ramovabarva = Button(nastavenia, text="Nastavte barvu pro rám okna", command=RamovaBarva)
+    ramovabarva = Button(nastavenia, text="Nastavte barvu pro rám okna", command=RamovaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     ramovabarva.pack()
-    zednibarva = Button(nastavenia, text="Nastavte barvu zdi, na které je okno", command=ZedniBarva)
+    zednibarva = Button(nastavenia, text="Nastavte barvu zdi, na které je okno", command=ZedniBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     zednibarva.pack()
     nastavenib = Frame(window, bg=barvy[1])
     nastavenib.pack()
-    barva1 = Button(nastavenib, text="Nastavte barvu textu", command=Barva1)
+    barva1 = Button(nastavenib, text="Nastavte barvu textu", command=Barva1, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     barva1.pack()
-    barva2 = Button(nastavenib, text="Nastavte barvu pro pozadí", command=Barva2)
+    barva2 = Button(nastavenib, text="Nastavte barvu pro pozadí", command=Barva2, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     barva2.pack()
     window.bind("<b>", NaUwod)
     window.bind("<B>", NaUwod)
@@ -69,10 +78,25 @@ def ZedniBarva():
 def Barva1():
     barvy.pop(0)
     barvy.insert(0,colorchooser.askcolor()[1])
+    cistabarva.config(fg=barvy[0], activeforeground=barvy[0])
+    spinavabarva.config(fg=barvy[0], activeforeground=barvy[0])
+    ramovabarva.config(fg=barvy[0], activeforeground=barvy[0])
+    zednibarva.config(fg=barvy[0], activeforeground=barvy[0])
+    barva1.config(fg=barvy[0], activeforeground=barvy[0])
+    barva2.config(fg=barvy[0], activeforeground=barvy[0])
 
 def Barva2():
     barvy.pop()
     barvy.insert(1,colorchooser.askcolor()[1])
+    cistabarva.config(bg=barvy[1], activebackground=barvy[1])
+    spinavabarva.config(bg=barvy[1], activebackground=barvy[1])
+    ramovabarva.config(bg=barvy[1], activebackground=barvy[1])
+    zednibarva.config(bg=barvy[1], activebackground=barvy[1])
+    barva1.config(bg=barvy[1], activebackground=barvy[1])
+    barva2.config(bg=barvy[1], activebackground=barvy[1])
+    nastavenia.config(bg=barvy[1])
+    nastavenib.config(bg=barvy[1])
+    window.config(bg=barvy[1])
 
 def NaUwod(*args):
     nastavenia.destroy()
