@@ -1,5 +1,6 @@
 from tkinter import *
 from data import *
+from preklady import *
 from tkinter import colorchooser
 
 aktualni_otazka = 0
@@ -15,6 +16,12 @@ def Past(nt):
 def Start(*args):
     spustit.destroy()
     nastaveni.destroy()
+    window.bind("<S>", Past)
+    window.bind("<s>", Past)
+    window.bind(1, Past)
+    window.bind("<N>", Past)
+    window.bind("<n>", Past)
+    window.bind(2, Past)
     Okno()
 
 def NaHru(*args):
@@ -31,6 +38,7 @@ def Nastaveni(*args):
     global zednibarva
     global barva1
     global barva2
+    global znastaveni
 
     spustit.destroy()
     nastaveni.destroy()
@@ -42,22 +50,24 @@ def Nastaveni(*args):
     window.bind(2, Past)
     nastavenia = Frame(window, bg=barvy[1])
     nastavenia.pack()
-    cistabarva = Button(nastavenia, text="Nastavte barvu pro vyčestěné části okna", command=CistaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    cistabarva = Button(nastavenia, text=cisba[a], command=CistaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     cistabarva.pack()
-    spinavabarva = Button(nastavenia, text="Nastavte barvu pro špinavé části okna", command=SpinavaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    spinavabarva = Button(nastavenia, text=spinba[a], command=SpinavaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     spinavabarva.pack()
-    ramovabarva = Button(nastavenia, text="Nastavte barvu pro rám okna", command=RamovaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    ramovabarva = Button(nastavenia, text=ramba[a], command=RamovaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     ramovabarva.pack()
-    zednibarva = Button(nastavenia, text="Nastavte barvu zdi, na které je okno", command=ZedniBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    zednibarva = Button(nastavenia, text=zdiba[a], command=ZedniBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     zednibarva.pack()
     nastavenib = Frame(window, bg=barvy[1])
     nastavenib.pack()
-    barva1 = Button(nastavenib, text="Nastavte barvu textu", command=Barva1, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    barva1 = Button(nastavenib, text=bar1[a], command=Barva1, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     barva1.pack()
-    barva2 = Button(nastavenib, text="Nastavte barvu pro pozadí", command=Barva2, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    barva2 = Button(nastavenib, text=bar2[a], command=Barva2, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
     barva2.pack()
     window.bind("<b>", NaUwod)
     window.bind("<B>", NaUwod)
+    znastaveni = Button(window, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], text=znas[a], command=NaUwod)
+    znastaveni.place(x=window.winfo_screenwidth()/2, y=window.winfo_screenheight()/1.1, anchor=CENTER)
 
 def CistaBarva():
     barvy_okna.pop(0)
@@ -96,11 +106,13 @@ def Barva2():
     barva2.config(bg=barvy[1], activebackground=barvy[1])
     nastavenia.config(bg=barvy[1])
     nastavenib.config(bg=barvy[1])
+    znastaveni.config(bg=barvy[1])
     window.config(bg=barvy[1])
 
 def NaUwod(*args):
     nastavenia.destroy()
     nastavenib.destroy()
+    znastaveni.destroy()
     window.config(bg=barvy[1])
     window.bind("<b>", Past)
     window.bind("<B>", Past)
@@ -108,10 +120,14 @@ def NaUwod(*args):
 
 def ZkusitZnovu():
     global aktualni_otazka
+    global spravne_odpovedi_pocet
+    global spatne_odpovedi_pocet
     znovu.destroy()
     platno.destroy()
     cteni_vysledku.destroy()
     aktualni_otazka = 0
+    spravne_odpovedi_pocet = 0
+    spatne_odpovedi_pocet = 0
     Okno()
 
 def Kontrola(*args):
@@ -124,7 +140,7 @@ def Kontrola(*args):
     if x.get() == spravne_odpovedi[aktualni_otazka]:
         zadane_odpovedi.append(barvy_okna[0])
         spravne_odpovedi_pocet += 1
-        print("Otázka " + str(aktualni_otazka+1) + ": " + str(x.get()) + "==" + str(spravne_odpovedi[aktualni_otazka]) + " (Správně)")
+        print("Otázka " + str(aktualni_otazka+1) + ": " + str(x.get()) + "==" + str(spravne_odpovedi[aktualni_otazka]) + "(Správně)")
     elif x.get() != spravne_odpovedi[aktualni_otazka]:
         zadane_odpovedi.append(barvy_okna[1])
         spatne_odpovedi_pocet += 1
@@ -156,16 +172,16 @@ def Otazka_1():
     global odeslani_odpovedi1
     global x
 
-    otazky_prostor.config(text=otazky[aktualni_otazka])
+    otazky_prostor.config(text=otazky[a][aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
     frame1 = Frame(window, bg=barvy[1])
     frame1.pack()
-    for i in range(len(moznosti[aktualni_otazka])):
-            moznostni_prostor = Radiobutton(frame1, text=moznosti[aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+    for i in range(len(moznosti[a][aktualni_otazka])):
+            moznostni_prostor = Radiobutton(frame1, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi1 = Button(frame1, text="Zkontrolovat otázku", command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+    odeslani_odpovedi1 = Button(frame1, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
     odeslani_odpovedi1.pack()
 
 def Otazka_2():
@@ -173,16 +189,16 @@ def Otazka_2():
     global odeslani_odpovedi2
     global x
 
-    otazky_prostor.config(text=otazky[aktualni_otazka])
+    otazky_prostor.config(text=otazky[a][aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
     frame2 = Frame(window, bg=barvy[1])
     frame2.pack()
-    for i in range(len(moznosti[aktualni_otazka])):
-            moznostni_prostor = Radiobutton(frame2, text=moznosti[aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+    for i in range(len(moznosti[a][aktualni_otazka])):
+            moznostni_prostor = Radiobutton(frame2, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi2 = Button(frame2, text="Zkontrolovat otázku", command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+    odeslani_odpovedi2 = Button(frame2, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
     odeslani_odpovedi2.pack()
 
 def Otazka_3():
@@ -190,16 +206,16 @@ def Otazka_3():
     global odeslani_odpovedi3
     global x
 
-    otazky_prostor.config(text=otazky[aktualni_otazka])
+    otazky_prostor.config(text=otazky[a][aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
     frame3 = Frame(window, bg=barvy[1])
     frame3.pack()
-    for i in range(len(moznosti[aktualni_otazka])):
-            moznostni_prostor = Radiobutton(frame3, text=moznosti[aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+    for i in range(len(moznosti[a][aktualni_otazka])):
+            moznostni_prostor = Radiobutton(frame3, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi3 = Button(frame3, text="Zkontrolovat otázku", command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+    odeslani_odpovedi3 = Button(frame3, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
     odeslani_odpovedi3.pack()
 
 def Otazka_4():
@@ -207,16 +223,16 @@ def Otazka_4():
     global odeslani_odpovedi4
     global x
 
-    otazky_prostor.config(text=otazky[aktualni_otazka])
+    otazky_prostor.config(text=otazky[a][aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
     frame4 = Frame(window, bg=barvy[1])
     frame4.pack()
-    for i in range(len(moznosti[aktualni_otazka])):
-            moznostni_prostor = Radiobutton(frame4, text=moznosti[aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    for i in range(len(moznosti[a][aktualni_otazka])):
+            moznostni_prostor = Radiobutton(frame4, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi4 = Button(frame4, text="Zkontrolovat otázku", command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+    odeslani_odpovedi4 = Button(frame4, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
     odeslani_odpovedi4.pack()
 
 def Oknow():
@@ -233,12 +249,12 @@ def Uwod():
     global spustit
     global nastaveni
 
-    spustit = Button(window, text="Spustit", command=Start, height=5, width=100, bg=barvy[0], activebackground=barvy[0])
+    spustit = Button(window, text=spust[a], command=Start, height=5, width=100, bg=barvy[0], activebackground=barvy[0])
     spustit.place(x=window.winfo_screenwidth()/2, y=window.winfo_screenheight()/2-50, anchor=CENTER)
     window.bind("<S>", Start)
     window.bind("<s>", Start)
     window.bind(1, Start)
-    nastaveni = Button(window, text="Nastaveni", command=Nastaveni, height=5, width=100, bg=barvy[0], activebackground=barvy[0])
+    nastaveni = Button(window, text=nast[a], command=Nastaveni, height=5, width=100, bg=barvy[0], activebackground=barvy[0])
     nastaveni.place(x=window.winfo_screenwidth()/2, y=window.winfo_screenheight()/2+50, anchor=CENTER)
     window.bind("<N>", Nastaveni)
     window.bind("<n>", Nastaveni)
@@ -296,25 +312,25 @@ def Okno():
 
     platno.pack()
     if aktualni_otazka == 0:    
-        na_hru = Button(window, text="vyčistit okno", command=NaHru, bg=barvy_okna[2], activebackground=barvy_okna[2])
+        na_hru = Button(window, text=vyčok[a], command=NaHru, bg=barvy_okna[2], activebackground=barvy_okna[2])
         na_hru.place(x=width/2, y=height/2+height/2.3, anchor=CENTER)
         window.bind("<Return>", NaHru)
 
     else:
         if spravne_odpovedi_pocet == 0:
-            cteni_vysledku = Label(window, text=("Nepovedlo se vám vyčistit okno"), background=barvy_okna[2])
+            cteni_vysledku = Label(window, text=vyčnic[a], background=barvy_okna[2])
             cteni_vysledku.place(x=width/2, y=height/2, anchor=CENTER)
-        elif spravne_odpovedi_pocet < len(otazky):
-            cteni_vysledku = Label(window, text=("Vyčistili jste {}/{} okna").format(spravne_odpovedi_pocet, len(otazky)), background=barvy_okna[2])
+        elif spravne_odpovedi_pocet < len(otazky[a]):
+            cteni_vysledku = Label(window, text=vyčvíc[a].format(spravne_odpovedi_pocet, len(otazky[a])), background=barvy_okna[2])
             cteni_vysledku.place(x=width/2, y=height/2, anchor=CENTER)
-        elif spravne_odpovedi_pocet == len(otazky):
-            cteni_vysledku = Label(window, text=("Vyčistili jste celé okno"), background=barvy_okna[2])
+        elif spravne_odpovedi_pocet == len(otazky[a]):
+            cteni_vysledku = Label(window, text=vyčvše[a], background=barvy_okna[2])
             cteni_vysledku.place(x=width/2, y=height/2, anchor=CENTER)
         
-        znovu = Button(platno, text="Spustit znovu", command=ZkusitZnovu, bg=barvy_okna[2], activebackground=barvy_okna[2])
+        znovu = Button(platno, text=znov[a], command=ZkusitZnovu, bg=barvy_okna[2], activebackground=barvy_okna[2])
         znovu.place(x=width/2, y=height/2+height/2.3, anchor=CENTER)
 
-if len(otazky) == 4:
+if len(otazky[a]) == 4:
     Oknow()
 else:
     win = Tk()
