@@ -1,5 +1,4 @@
 from tkinter import *
-from turtle import title
 from data import *
 from tkinter import colorchooser
 from tkinter import messagebox
