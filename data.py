@@ -66,10 +66,12 @@ restart_okna_t = ["Restartovat","Restart","Neustart","Restartovať"]
 restart_okna = ["Aby se projevily změny, musíme aplikaci restartovat","We need to restart the application for the changes to take effect","Wir müssen die Anwendung neu starten, damit die Änderungen wirksam werden","Aby sa projavily změny, mosíme aplukacu restartovať"]
 warovani = ["Varování", "Warning", "Warnung", "Pazgřivadlo"]
 upozorneni = ["Pokud jste upravili některé barvy, nemusí aplikace fungovat správně!","If you have modified some colors, the app may not work properly!","Wenn Sie einige Farben geändert haben, funktioniert die App möglicherweise nicht richtig!","Esli ste upraveli njankjaké barvé, može to zpúsobit pazgřívé chování aplukace"]
-infox = ["Informace","Info","Informationen","Enem kydy"]
+infox = ["Informace","Info","Informationen","Informacze"]
 bezezmeny = ["Tento jazyk právě používáte","You are currently using this language","Sie verwenden derzeit diese Sprache","Tutajc ste nemoseli klikať, bo tentojc jazuk toťkajc púžíváte"]
 obar = ["Zde si můžete přizpůsobit barvy:","Here you can customize the colors:","Hier können Sie die Farben anpassen:","Tutajc si možete upravovať barve"]
 mluvi = ["Zde můžete změnit jazyk aplikace:","Here you can change the language of the application:","Hier können Sie die Sprache der Anwendung ändern:","Tutajc si možete přepnút jazuk"]
+nenekonecne = ["Chtete opravdu spustit hru znovu?","Do you really want to run the game again?","Willst du das Spiel wirklich noch einmal spielen?","Chcete opravdu spusťat hru znova"]
+web = ["O Múdrých Hagridech","About Múdří Hagridi","Über Múdří Hagridi","O Múdrých Hagridoch"]
 
 spravne_odpovedi = [0,3,2,4]
 

@@ -1,7 +1,8 @@
 from tkinter import *
 from data import *
 from tkinter import colorchooser
-from tkinter import messagebox
+from tkinter.messagebox import *
+import webbrowser
 
 aktualni_otazka = 0
 odpoved = 0
@@ -141,7 +142,6 @@ def Barva2():
     window.config(bg=barvy[1])
 
 def NaUwod(*args):
-    messagebox.showwarning(title=warovani[a], message=upozorneni[a])
     nastavenia.destroy()
     nastavenib.destroy()
     znastaveni.destroy()
@@ -150,17 +150,23 @@ def NaUwod(*args):
     window.bind("<B>", Past)
     Uwod()
 
-def ZkusitZnovu():
+def ZkusitZnovu(*args):
     global aktualni_otazka
     global spravne_odpovedi_pocet
     global spatne_odpovedi_pocet
-    znovu.destroy()
-    platno.destroy()
-    cteni_vysledku.destroy()
-    aktualni_otazka = 0
-    spravne_odpovedi_pocet = 0
-    spatne_odpovedi_pocet = 0
-    Okno()
+    b = askyesnocancel(title=infox[a], message=nenekonecne[a]) 
+    if b == True:
+        znovu.destroy()
+        platno.destroy()
+        cteni_vysledku.destroy()
+        aktualni_otazka = 0
+        spravne_odpovedi_pocet = 0
+        spatne_odpovedi_pocet = 0
+        Okno()
+    elif b == False:
+        pass
+    else:
+        Pryc()
 
 def Kontrola(*args):
     global x
@@ -172,12 +178,10 @@ def Kontrola(*args):
     if x.get() == spravne_odpovedi[aktualni_otazka]:
         zadane_odpovedi.append(barvy_okna[0])
         spravne_odpovedi_pocet += 1
-        print("Otázka " + str(aktualni_otazka+1) + ": " + str(x.get()) + "==" + str(spravne_odpovedi[aktualni_otazka]) + "(Správně)")
     elif x.get() != spravne_odpovedi[aktualni_otazka]:
         zadane_odpovedi.append(barvy_okna[1])
         spatne_odpovedi_pocet += 1
-        print("Otázka " + str(aktualni_otazka+1) + ": " + str(x.get()) + "!=" + str(spravne_odpovedi[aktualni_otazka]) + " (Špatně)")
-    
+
     aktualni_otazka += 1
     if 1 <= aktualni_otazka <= 3:
         frame.destroy()
@@ -188,6 +192,9 @@ def Kontrola(*args):
         frame.destroy()
         otazky_prostor.destroy()
         Okno()
+
+def Webpage():
+    webbrowser.open_new("http://mudrihagridi.cz/")
 
 def Pryc():
     window.destroy()
@@ -207,7 +214,7 @@ def Jazyk():
         aktualni_otazka = 0
         zadane_odpovedi.clear()
 
-        if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+        if askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
             window.destroy()
             if len(otazky[a]) == 4:
                 Oknow()
@@ -216,7 +223,7 @@ def Jazyk():
                 Label(win, text="1/0").pack()
                 win.mainloop()
     else:
-        messagebox.showinfo(title=infox[a], message=bezezmeny[a])
+        showinfo(title=infox[a], message=bezezmeny[a])
 
 def Cestina():
     global j
@@ -273,6 +280,9 @@ def Oknow():
     jazyk.add_command(label=anglictina[a], command=Anglictina)
     jazyk.add_command(label=nemcina[a], command=Nemcina)
     jazyk.add_command(label=moravstina[a], command=Moravstina)
+    o = Menu(menu, tearoff=False)
+    menu.add_cascade(label=infox[a],menu=o)
+    o.add_command(label=web[a],command=Webpage)
     Uwod()
     window.mainloop()
 
@@ -360,6 +370,7 @@ def Okno():
         
         znovu = Button(platno, text=znov[a], command=ZkusitZnovu, bg=barvy_okna[2], activebackground=barvy_okna[2])
         znovu.place(x=width/2, y=height/2+height/2.3, anchor=CENTER)
+        window.bind("<Return>", ZkusitZnovu)
 
 if len(otazky[a]) == 4:
     Oknow()
