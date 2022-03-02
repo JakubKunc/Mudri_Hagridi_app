@@ -1,6 +1,6 @@
 from tkinter import *
+from turtle import title
 from data import *
-from preklady import *
 from tkinter import colorchooser
 from tkinter import messagebox
 
@@ -40,6 +40,10 @@ def Nastaveni(*args):
     global barva1
     global barva2
     global znastaveni
+    global jazyky
+    global jazyky_command
+    global barva
+    global mluv
 
     spustit.destroy()
     nastaveni.destroy()
@@ -51,26 +55,32 @@ def Nastaveni(*args):
     window.bind(2, Past)
     nastavenia = Frame(window, bg=barvy[1])
     nastavenia.pack()
-    cistabarva = Button(nastavenia, text=cisba[a], command=CistaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    barva = Label(nastavenia, text=obar[a], bg=barvy[1], fg=barvy[0], padx=10, pady=15)
+    barva.pack()
+    cistabarva = Button(nastavenia, text=cisba[a], command=CistaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], padx=10, pady=10)
     cistabarva.pack()
-    spinavabarva = Button(nastavenia, text=spinba[a], command=SpinavaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    spinavabarva = Button(nastavenia, text=spinba[a], command=SpinavaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], padx=10, pady=10)
     spinavabarva.pack()
-    ramovabarva = Button(nastavenia, text=ramba[a], command=RamovaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    ramovabarva = Button(nastavenia, text=ramba[a], command=RamovaBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], padx=10, pady=10)
     ramovabarva.pack()
-    zednibarva = Button(nastavenia, text=zdiba[a], command=ZedniBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    zednibarva = Button(nastavenia, text=zdiba[a], command=ZedniBarva, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], padx=10, pady=10)
     zednibarva.pack()
-    barva1 = Button(nastavenia, text=bar1[a], command=Barva1, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    barva1 = Button(nastavenia, text=bar1[a], command=Barva1, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], padx=10, pady=10)
     barva1.pack()
-    barva2 = Button(nastavenia, text=bar2[a], command=Barva2, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    barva2 = Button(nastavenia, text=bar2[a], command=Barva2, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], padx=10, pady=10)
     barva2.pack()
     nastavenib = Frame(window, bg=barvy[1])
     nastavenib.pack()
-    for i in range(len(jazyky[a])):
-        jzyk = Button(nastavenib, text=jazyky[a][i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    mluv = Label(nastavenia, text=mluvi[a], bg=barvy[1], fg=barvy[0], padx=10, pady=15)
+    mluv.pack()
+    jazyky = [cestina[a], anglictina[a], nemcina[a], moravstina[a]]
+    jazyky_command = [Cestina, Anglictina, Nemcina, Moravstina]
+    for i in range(len(jazyky)):
+        jzyk = Button(nastavenib, text=jazyky[i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], command=jazyky_command[i], padx=10, pady=10)
         jzyk.pack()
     window.bind("<b>", NaUwod)
     window.bind("<B>", NaUwod)
-    znastaveni = Button(window, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], text=znas[a], command=NaUwod)
+    znastaveni = Button(window, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], text=znas[a], command=NaUwod, padx=10, pady=10)
     znastaveni.place(x=window.winfo_screenwidth()/2, y=window.winfo_screenheight()/1.1, anchor=CENTER)
 
 def CistaBarva():
@@ -93,41 +103,46 @@ def Barva1():
     global nastavenib
     barvy.pop(0)
     barvy.insert(0,colorchooser.askcolor()[1])
+    barva.config(fg=barvy[0])
     cistabarva.config(fg=barvy[0], activeforeground=barvy[0])
     spinavabarva.config(fg=barvy[0], activeforeground=barvy[0])
     ramovabarva.config(fg=barvy[0], activeforeground=barvy[0])
     zednibarva.config(fg=barvy[0], activeforeground=barvy[0])
     barva1.config(fg=barvy[0], activeforeground=barvy[0])
     barva2.config(fg=barvy[0], activeforeground=barvy[0])
+    mluv.config(fg=barvy[0])
     nastavenib.destroy()
     nastavenib = Frame(window, bg=barvy[1])
     nastavenib.pack()
-    for i in range(len(jazyky[a])):
-        jzyk = Button(nastavenib, text=jazyky[a][i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    for i in range(len(jazyky)):
+        jzyk = Button(nastavenib, text=jazyky[i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], command=jazyky_command[i], padx=10, pady=10)
         jzyk.pack()
     znastaveni.config(fg=barvy[0], activeforeground=barvy[0])
 
 def Barva2():
     global nastavenib
-    barvy.pop()
+    barvy.pop(1)
     barvy.insert(1,colorchooser.askcolor()[1])
+    barva.config(bg=barvy[1])
     cistabarva.config(bg=barvy[1], activebackground=barvy[1])
     spinavabarva.config(bg=barvy[1], activebackground=barvy[1])
     ramovabarva.config(bg=barvy[1], activebackground=barvy[1])
     zednibarva.config(bg=barvy[1], activebackground=barvy[1])
     barva1.config(bg=barvy[1], activebackground=barvy[1])
     barva2.config(bg=barvy[1], activebackground=barvy[1])
+    mluv.config(bg=barvy[1])
     nastavenia.config(bg=barvy[1])
     nastavenib.destroy()
     nastavenib = Frame(window, bg=barvy[1])
     nastavenib.pack()
-    for i in range(len(jazyky[a])):
-        jzyk = Button(nastavenib, text=jazyky[a][i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
+    for i in range(len(jazyky)):
+        jzyk = Button(nastavenib, text=jazyky[i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], command=jazyky_command[i], padx=10, pady=10)
         jzyk.pack()
     znastaveni.config(bg=barvy[1], activebackground=barvy[1])
     window.config(bg=barvy[1])
 
 def NaUwod(*args):
+    messagebox.showwarning(title=warovani[a], message=upozorneni[a])
     nastavenia.destroy()
     nastavenib.destroy()
     znastaveni.destroy()
@@ -188,27 +203,30 @@ def Kontrola(*args):
 def Pryc():
     window.destroy()
 
-def Moravstina():
+def Cestina():
     global a
     global spravne_odpovedi_pocet
     global spatne_odpovedi_pocet
     global aktualni_otazka
     global zadane_odpovedi
 
-    a = 0
-    spravne_odpovedi_pocet = 0
-    spatne_odpovedi_pocet = 0
-    aktualni_otazka = 0
-    zadane_odpovedi.clear()
-    
-    if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
-        window.destroy()
-        if len(otazky[a]) == 4:
-            Oknow()
-        else:
-            win = Tk()
-            Label(win, text="1/0").pack()
-            win.mainloop()
+    if a != 0:
+        a = 0
+        spravne_odpovedi_pocet = 0
+        spatne_odpovedi_pocet = 0
+        aktualni_otazka = 0
+        zadane_odpovedi.clear()
+
+        if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+            window.destroy()
+            if len(otazky[a]) == 4:
+                Oknow()
+            else:
+                win = Tk()
+                Label(win, text="1/0").pack()
+                win.mainloop()
+    else:
+        messagebox.showinfo(title=infox[a], message=bezezmeny[a])
 
 def Anglictina():
     global a
@@ -217,20 +235,23 @@ def Anglictina():
     global aktualni_otazka
     global zadane_odpovedi
 
-    a = 1
-    spravne_odpovedi_pocet = 0
-    spatne_odpovedi_pocet = 0
-    aktualni_otazka = 0
-    zadane_odpovedi.clear()
+    if a != 1:
+        a = 1
+        spravne_odpovedi_pocet = 0
+        spatne_odpovedi_pocet = 0
+        aktualni_otazka = 0
+        zadane_odpovedi.clear()
 
-    if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
-        window.destroy()
-        if len(otazky[a]) == 4:
-            Oknow()
-        else:
-            win = Tk()
-            Label(win, text="1/0").pack()
-            win.mainloop()
+        if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+            window.destroy()
+            if len(otazky[a]) == 4:
+                Oknow()
+            else:
+                win = Tk()
+                Label(win, text="1/0").pack()
+                win.mainloop()
+    else:
+        messagebox.showinfo(title=infox[a], message=bezezmeny[a])
 
 def Nemcina():
     global a
@@ -239,42 +260,48 @@ def Nemcina():
     global aktualni_otazka
     global zadane_odpovedi
 
-    a = 2
-    spravne_odpovedi_pocet = 0
-    spatne_odpovedi_pocet = 0
-    aktualni_otazka = 0
-    zadane_odpovedi.clear()
+    if a != 2:
+        a = 2
+        spravne_odpovedi_pocet = 0
+        spatne_odpovedi_pocet = 0
+        aktualni_otazka = 0
+        zadane_odpovedi.clear()
 
-    if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
-        window.destroy()
-        if len(otazky[a]) == 4:
-            Oknow()
-        else:
-            win = Tk()
-            Label(win, text="1/0").pack()
-            win.mainloop()
+        if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+            window.destroy()
+            if len(otazky[a]) == 4:
+                Oknow()
+            else:
+                win = Tk()
+                Label(win, text="1/0").pack()
+                win.mainloop()
+    else:
+        messagebox.showinfo(title=infox[a], message=bezezmeny[a])
 
-def Cestina():
+def Moravstina():
     global a
     global spravne_odpovedi_pocet
     global spatne_odpovedi_pocet
     global aktualni_otazka
     global zadane_odpovedi
 
-    a = 3
-    spravne_odpovedi_pocet = 0
-    spatne_odpovedi_pocet = 0
-    aktualni_otazka = 0
-    zadane_odpovedi.clear()
+    if a != 3:
+        a = 3
+        spravne_odpovedi_pocet = 0
+        spatne_odpovedi_pocet = 0
+        aktualni_otazka = 0
+        zadane_odpovedi.clear()
 
-    if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
-        window.destroy()
-        if len(otazky[a]) == 4:
-            Oknow()
-        else:
-            win = Tk()
-            Label(win, text="1/0").pack()
-            win.mainloop()
+        if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+            window.destroy()
+            if len(otazky[a]) == 4:
+                Oknow()
+            else:
+                win = Tk()
+                Label(win, text="1/0").pack()
+                win.mainloop()
+    else:
+        messagebox.showinfo(title=infox[a], message=bezezmeny[a])
 
 def Otazka_1():
     global frame1
@@ -358,10 +385,10 @@ def Oknow():
     zavrit.add_command(label=zavritw[a], command=Pryc)
     jazyk = Menu(menu, tearoff=False)
     menu.add_cascade(label=jaz[a], menu=jazyk)
-    jazyk.add_command(label=moravstina[a], command=Moravstina)
+    jazyk.add_command(label=cestina[a], command=Cestina)
     jazyk.add_command(label=anglictina[a], command=Anglictina)
     jazyk.add_command(label=nemcina[a], command=Nemcina)
-    jazyk.add_command(label=cestina[a], command=Cestina)
+    jazyk.add_command(label=moravstina[a], command=Moravstina)
     Uwod()
     window.mainloop()
 
