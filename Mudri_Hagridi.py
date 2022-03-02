@@ -192,15 +192,16 @@ def Kontrola(*args):
 def Pryc():
     window.destroy()
 
-def Cestina():
+def Jazyk():
     global a
+    global j
     global spravne_odpovedi_pocet
     global spatne_odpovedi_pocet
     global aktualni_otazka
     global zadane_odpovedi
 
-    if a != 0:
-        a = 0
+    if a != j:
+        a = j
         spravne_odpovedi_pocet = 0
         spatne_odpovedi_pocet = 0
         aktualni_otazka = 0
@@ -216,81 +217,26 @@ def Cestina():
                 win.mainloop()
     else:
         messagebox.showinfo(title=infox[a], message=bezezmeny[a])
+
+def Cestina():
+    global j
+    j = 0
+    Jazyk()
 
 def Anglictina():
-    global a
-    global spravne_odpovedi_pocet
-    global spatne_odpovedi_pocet
-    global aktualni_otazka
-    global zadane_odpovedi
-
-    if a != 1:
-        a = 1
-        spravne_odpovedi_pocet = 0
-        spatne_odpovedi_pocet = 0
-        aktualni_otazka = 0
-        zadane_odpovedi.clear()
-
-        if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
-            window.destroy()
-            if len(otazky[a]) == 4:
-                Oknow()
-            else:
-                win = Tk()
-                Label(win, text="1/0").pack()
-                win.mainloop()
-    else:
-        messagebox.showinfo(title=infox[a], message=bezezmeny[a])
+    global j
+    j = 1
+    Jazyk()
 
 def Nemcina():
-    global a
-    global spravne_odpovedi_pocet
-    global spatne_odpovedi_pocet
-    global aktualni_otazka
-    global zadane_odpovedi
-
-    if a != 2:
-        a = 2
-        spravne_odpovedi_pocet = 0
-        spatne_odpovedi_pocet = 0
-        aktualni_otazka = 0
-        zadane_odpovedi.clear()
-
-        if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
-            window.destroy()
-            if len(otazky[a]) == 4:
-                Oknow()
-            else:
-                win = Tk()
-                Label(win, text="1/0").pack()
-                win.mainloop()
-    else:
-        messagebox.showinfo(title=infox[a], message=bezezmeny[a])
+    global j
+    j = 2
+    Jazyk()
 
 def Moravstina():
-    global a
-    global spravne_odpovedi_pocet
-    global spatne_odpovedi_pocet
-    global aktualni_otazka
-    global zadane_odpovedi
-
-    if a != 3:
-        a = 3
-        spravne_odpovedi_pocet = 0
-        spatne_odpovedi_pocet = 0
-        aktualni_otazka = 0
-        zadane_odpovedi.clear()
-
-        if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
-            window.destroy()
-            if len(otazky[a]) == 4:
-                Oknow()
-            else:
-                win = Tk()
-                Label(win, text="1/0").pack()
-                win.mainloop()
-    else:
-        messagebox.showinfo(title=infox[a], message=bezezmeny[a])
+    global j
+    j = 3
+    Jazyk()
 
 def Otazka():
     global frame
