@@ -47,4 +47,4 @@ zadane_odpovedi = []
 barvy = ["#00BFFF","#442E1D"]
 barvy_okna = ["#00BFFF","#442E1D","#DC143C","#239B11"] #blankytně modrá, bahnitě hnědá, karmínově červená, nwmjaká zelená
 
-jazyky = [["Cěština","Angličtina"],["Czech","English"]]
+jazyky = [["Moravština","Anglečtina","Dederónština","Čecháčština"],["Moravian","English","German","Czech"],["Mährisch","English","Deutsch","Tschechisch"],["Moravština","Angličtina","Němčina","Čeština"]]

@@ -22,3 +22,5 @@ nemcina = ["Dederónština","German","Deutsch","Němčina"]
 cestina = ["Čecháčština","Czech","Tschechisch","Čeština"]
 restart_okna_t = ["Restartovať","Restart","Neustart","Restartovat"]
 restart_okna = ["Aby sa projevily změny, mosíme aplikacu restartovať","We need to restart the application for the changes to take effect","Wir müssen die Anwendung neu starten, damit die Änderungen wirksam werden","Aby se projevily změny, musíme aplikaci restartovat"]
+
+#prohodit moravštinu s češtinou
