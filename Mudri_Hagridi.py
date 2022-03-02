@@ -10,7 +10,7 @@ spatne_odpovedi_pocet = 0
 
 a = 0
 
-def Past(nt):
+def Past(*NT):
     pass
 
 def Start(*args):
@@ -179,23 +179,13 @@ def Kontrola(*args):
         print("Otázka " + str(aktualni_otazka+1) + ": " + str(x.get()) + "!=" + str(spravne_odpovedi[aktualni_otazka]) + " (Špatně)")
     
     aktualni_otazka += 1
-    if aktualni_otazka == 1:
-        frame1.destroy()
-        odeslani_odpovedi1.destroy()
-        Otazka_2()
-
-    elif aktualni_otazka == 2:
-        frame2.destroy()
-        odeslani_odpovedi2.destroy()
-        Otazka_3()
-    
-    elif aktualni_otazka == 3:
-        frame3.destroy()
-        odeslani_odpovedi3.destroy()
-        Otazka_4()
+    if 1 <= aktualni_otazka <= 3:
+        frame.destroy()
+        odeslaniodpovedi.destroy()
+        Otazka()
 
     elif aktualni_otazka == 4:
-        frame4.destroy()
+        frame.destroy()
         otazky_prostor.destroy()
         Okno()
 
@@ -302,73 +292,22 @@ def Moravstina():
     else:
         messagebox.showinfo(title=infox[a], message=bezezmeny[a])
 
-def Otazka_1():
-    global frame1
-    global odeslani_odpovedi1
+def Otazka():
+    global frame
+    global odeslaniodpovedi
     global x
 
     otazky_prostor.config(text=otazky[a][aktualni_otazka])
     aktualni_moznost = 0
     x = IntVar()
-    frame1 = Frame(window, bg=barvy[1])
-    frame1.pack()
+    frame = Frame(window, bg=barvy[1])
+    frame.pack()
     for i in range(len(moznosti[a][aktualni_otazka])):
-            moznostni_prostor = Radiobutton(frame1, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+            moznostni_prostor = Radiobutton(frame, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
             moznostni_prostor.pack()
             aktualni_moznost+=1
-    odeslani_odpovedi1 = Button(frame1, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
-    odeslani_odpovedi1.pack()
-
-def Otazka_2():
-    global frame2
-    global odeslani_odpovedi2
-    global x
-
-    otazky_prostor.config(text=otazky[a][aktualni_otazka])
-    aktualni_moznost = 0
-    x = IntVar()
-    frame2 = Frame(window, bg=barvy[1])
-    frame2.pack()
-    for i in range(len(moznosti[a][aktualni_otazka])):
-            moznostni_prostor = Radiobutton(frame2, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
-            moznostni_prostor.pack()
-            aktualni_moznost+=1
-    odeslani_odpovedi2 = Button(frame2, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
-    odeslani_odpovedi2.pack()
-
-def Otazka_3():
-    global frame3
-    global odeslani_odpovedi3
-    global x
-
-    otazky_prostor.config(text=otazky[a][aktualni_otazka])
-    aktualni_moznost = 0
-    x = IntVar()
-    frame3 = Frame(window, bg=barvy[1])
-    frame3.pack()
-    for i in range(len(moznosti[a][aktualni_otazka])):
-            moznostni_prostor = Radiobutton(frame3, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
-            moznostni_prostor.pack()
-            aktualni_moznost+=1
-    odeslani_odpovedi3 = Button(frame3, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
-    odeslani_odpovedi3.pack()
-
-def Otazka_4():
-    global frame4
-    global odeslani_odpovedi4
-    global x
-
-    otazky_prostor.config(text=otazky[a][aktualni_otazka])
-    aktualni_moznost = 0
-    x = IntVar()
-    frame4 = Frame(window, bg=barvy[1])
-    frame4.pack()
-    for i in range(len(moznosti[a][aktualni_otazka])):
-            moznostni_prostor = Radiobutton(frame4, text=moznosti[a][aktualni_otazka][aktualni_moznost], variable=x, value=i, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0])
-            moznostni_prostor.pack()
-            aktualni_moznost+=1
-    odeslani_odpovedi4 = Button(frame4, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
-    odeslani_odpovedi4.pack()
+    odeslaniodpovedi = Button(frame, text=kontrot[a], command=Kontrola, bg=barvy[1], activebackground=barvy[1] ,fg=barvy[0], activeforeground=barvy[0])
+    odeslaniodpovedi.pack()
 
 def Oknow():
     global window
@@ -421,7 +360,7 @@ def Hra():
     otazky_prostor.pack()
     window.bind("<Return>", Kontrola)
 
-    Otazka_1()
+    Otazka()
 
 def Okno():
     global window
