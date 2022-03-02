@@ -188,7 +188,7 @@ def Kontrola(*args):
 def Pryc():
     window.destroy()
 
-def Cestina():
+def Moravstina():
     global a
     global spravne_odpovedi_pocet
     global spatne_odpovedi_pocet
@@ -240,6 +240,28 @@ def Nemcina():
     global zadane_odpovedi
 
     a = 2
+    spravne_odpovedi_pocet = 0
+    spatne_odpovedi_pocet = 0
+    aktualni_otazka = 0
+    zadane_odpovedi.clear()
+
+    if messagebox.askokcancel(title=restart_okna_t[a], message=restart_okna[a]):
+        window.destroy()
+        if len(otazky[a]) == 4:
+            Oknow()
+        else:
+            win = Tk()
+            Label(win, text="1/0").pack()
+            win.mainloop()
+
+def Cestina():
+    global a
+    global spravne_odpovedi_pocet
+    global spatne_odpovedi_pocet
+    global aktualni_otazka
+    global zadane_odpovedi
+
+    a = 3
     spravne_odpovedi_pocet = 0
     spatne_odpovedi_pocet = 0
     aktualni_otazka = 0
@@ -336,12 +358,12 @@ def Oknow():
     zavrit.add_command(label=zavritw[a], command=Pryc)
     jazyk = Menu(menu, tearoff=False)
     menu.add_cascade(label=jaz[a], menu=jazyk)
-    jazyk.add_command(label=cestina[a], command=Cestina)
+    jazyk.add_command(label=moravstina[a], command=Moravstina)
     jazyk.add_command(label=anglictina[a], command=Anglictina)
     jazyk.add_command(label=nemcina[a], command=Nemcina)
+    jazyk.add_command(label=cestina[a], command=Cestina)
     Uwod()
     window.mainloop()
-
 
 def Uwod():
     global spustit
