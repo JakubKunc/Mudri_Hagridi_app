@@ -78,9 +78,9 @@ def Nastaveni(*args):
     for i in range(len(jazyky)):
         jzyk = Button(nastavenib, text=jazyky[i], bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], command=jazyky_command[i], padx=10, pady=10)
         jzyk.pack()
-    window.bind("<b>", NaUwod)
-    window.bind("<B>", NaUwod)
-    znastaveni = Button(window, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], text=znas[a], command=NaUwod, padx=10, pady=10)
+    window.bind("<b>", ZmenaNastaveni)
+    window.bind("<B>", ZmenaNastaveni)
+    znastaveni = Button(window, bg=barvy[1], activebackground=barvy[1], fg=barvy[0], activeforeground=barvy[0], text=znas[a], command=ZmenaNastaveni, padx=10, pady=10)
     znastaveni.place(x=window.winfo_screenwidth()/2, y=window.winfo_screenheight()/1.1, anchor=CENTER)
 
 def CistaBarva():
@@ -140,6 +140,22 @@ def Barva2():
         jzyk.pack()
     znastaveni.config(bg=barvy[1], activebackground=barvy[1])
     window.config(bg=barvy[1])
+
+def ZmenaNastaveni():
+    global barvy
+    global barvy_okna
+    toz = askyesnocancel(title=warovani[a],message=upozorneni[a])
+    if toz == True:
+        barvy = []
+        barvy_okna = []
+        barvy = ["#00BFFF","#442E1D"]
+        barvy_okna = ["#00BFFF","#442E1D","#DC143C","#239B11"]
+        NaUwod()
+    elif toz == False:
+        NaUwod()
+    else:
+        pass
+
 
 def NaUwod(*args):
     nastavenia.destroy()
